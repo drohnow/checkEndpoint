@@ -11,4 +11,4 @@ Usage instructions:
 - clone the repo
 - cd into repo directory
 - run: pip install -r requirements.txt
-- On the commandline type: python3 checkEndpoint.py
+- on the commandline type: python3 checkEndpoint.py
