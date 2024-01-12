@@ -110,7 +110,7 @@ def checkEndpoint(endPointl):
 
 # entry point into program
 try:
-    endPoint = input("Enter endpoint beginging with 'https://' or 'http://' : ")
+    endPoint = input("Enter endpoint beginning with 'https://' or 'http://' : ")
     checkEndpoint(endPoint)
 except:
     print("Input was null or was not formatted correctly")
