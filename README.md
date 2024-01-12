@@ -11,4 +11,8 @@ Usage instructions:
 - clone the repo
 - cd into repo directory
 - run: pip install -r requirements.txt
-- on the commandline type: python3 checkEndpoint.py
+
+Testing:
+- test_checkEndpoint.py contains 10 tests for httpStatusCode() function.
+  (The httpsStatusCode function is responsible for retrieving http status code for the endpoint.)
+- Run test: pytest test_checkEndpoint.py -vv

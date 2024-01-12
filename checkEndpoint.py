@@ -10,51 +10,63 @@ def docMessage():
     docURL = 'https://en.wikipedia.org/wiki/List_of_HTTP_status_codes'
     print("see %s for more information about http status codes" % docURL)
 
-# def checks https:// and http:// endpoints; takes response and returns infornamtion about http status code and site status.
-def checkEndpoint(endPointl):
-    try:
-            ret = requests.head(endPoint)
-            print(ret.status_code)
-            # prints the int of the status code. Find more at httpstatusrappers.com :)
+# def returns the users inputed endpoint and statuscode result.
+def httpStatusCode():
+    endPoint = input("Enter endpoint beginging with 'https://' or 'http://': ")
+    print('checking endpoint: %s' % endPoint)
+    status = requests.head(endPoint).status_code
+    return endPoint, status
 
-            print('checking endpoint: %s' % endPoint)
-            time.sleep(2)
-        
-            if ret.status_code == 200:
-                print('status code is: ' + Fore.GREEN + str(ret.status_code))
+# def processes the status code.
+def endPointException():
+    print("Your input was 'Null', not formatted correctly, or the site does not exist.")
+    print("This program checks endpoints starting with 'https://' or 'http://.")
+    print("...please try again.")
+
+
+# def checks https:// and http:// endpoints; takes response and returns infornamtion about http status code and site status.
+def checkEndpoint(endPoint, httpStatusCode):
+    try:
+            if httpStatusCode == 200:
+                print('status code is: ' + Fore.GREEN + str(httpStatusCode))
                 print(Fore.WHITE + 'This indicates that the endpoint is online and healthy!')
                 docMessage()
-            elif ret.status_code == 404:
-                print('status code is: ' + Fore.RED + str(ret.status_code))
+            elif httpStatusCode == 400:
+                print('status code is: ' + Fore.RED + str(httpStatusCode))
+                print(Fore.WHITE + 'This indicates that the endpoint cannot or will not process the request due to something that is perceived to be a client error. \n')
+                print("This status code indicates the file or page that the browser is requesting wasn’t found by the server.")
+                docMessage()
+            elif httpStatusCode == 404:
+                print('status code is: ' + Fore.RED + str(httpStatusCode))
                 print(Fore.WHITE + 'This indicates that the endpoint is unreachable\n')
                 print("This status code indicates the file or page that the browser is requesting wasn’t found by the server.")
                 docMessage()
-            elif ret.status_code == 410:
-                print('status code is: ' + Fore.RED + str(ret.status_code))
+            elif httpStatusCode == 410:
+                print('status code is: ' + Fore.RED + str(httpStatusCode))
                 print(Fore.WHITE + 'This indicates that the endpoint is \n')
                 print("This status code indicates that the page is no longer available from the server and no forwarding address has been set up.")
                 docMessage()
-            elif ret.status_code == 500:
-                print('status code is: ' + Fore.RED + str(ret.status_code))
+            elif httpStatusCode == 500:
+                print('status code is: ' + Fore.RED + str(httpStatusCode))
                 print(Fore.WHITE + 'This indicates that the endpoint is offline and unhealthy!\n')
                 print("This status code indicates status that there is an internal problem with the server.")
                 docMessage()
-            elif ret.status_code== 503:
+            elif httpStatusCode== 503:
                 docMessage()
-                print('status code is: ' + Fore.RED + str(ret.status_code))
+                print('status code is: ' + Fore.RED + str(httpStatusCode))
                 print(Fore.WHITE + 'This indicates that the endpoint is offline and unhealthy!\n')
                 print("This status code indicates status that the server in currently overloaded or under maintenance.")
                 docMessage()
-            elif ret.status_code == 505:
+            elif httpStatusCode == 505:
                 docMessage()
-                print('status code is: ' + Fore.RED + str(ret.status_code))
+                print('status code is: ' + Fore.RED + str(httpStatusCode))
                 print(Fore.WHITE + 'This indicates that the endpoint is offline and unhealthy!\n')
                 print("This status code indicates status that the server in currently overloaded or under maintenance.")
                 docMessage()
             else:
-                print('status code is: ' + Fore.YELLOW + str(ret.status_code))
-                print(Fore.WHITE + 'If the the status code is "1xx", then endpoint received the request and responded with an informational response \n')
-                print(Fore.WHITE + 'If the the status code is "3xx", then endpoint redirected the request another endpoint \n')
+                print('status code is: ' + Fore.YELLOW + str(httpStatusCode))
+                print(Fore.WHITE + 'If the the status code is "1xx", then endpoint received the request and responded with an informational response. \n')
+                print(Fore.WHITE + 'If the the status code is "3xx", then endpoint redirected the request another endpoint. \n')
                 docMessage()
 
     except requests.ConnectionError:
@@ -65,7 +77,7 @@ def checkEndpoint(endPointl):
                 print(test_host(hostname[0]))
             except:
                 # response to user that endpoint does not exist.
-                print("not able to check SSL certificate expiry; the endpoint may be misspelled or does not exist")
+                print("not able to check SSL certificate expiry; the endpoint may be misspelled or does not exist.")
 
     # def returns ssl expire date
     def ssl_expiry_datetime(hostname: str) -> datetime.datetime:
@@ -110,12 +122,7 @@ def checkEndpoint(endPointl):
 
 # entry point into program
 try:
-    endPoint = input("Enter endpoint beginning with 'https://' or 'http://' : ")
-    checkEndpoint(endPoint)
+    endPoint, status_code = httpStatusCode()
+    checkEndpoint(endPoint, status_code)
 except:
-    print("Input was null or was not formatted correctly")
-    print("This program checks endpoints starting with 'https://' or 'http://")
-    print("...please try again")
-    
-
-    
+    endPointException()
