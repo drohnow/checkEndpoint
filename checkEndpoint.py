@@ -16,7 +16,7 @@ def httpStatusCode():
     print('\nchecking endpoint: %s\n' % endPoint)
     if endPoint[:8] == "https://":
         # if endpoint fails, then attempts to check SSL certificate for SSL endpoints.
-        print('This is an SSL endpoint that will check SSL certificate expiry..\n')
+        print('This is an SSL endpoint...will check SSL certificate status now..\n')
         hostname = (endPoint[8:].split("/"))
         print("SSL certificate status: ", test_host(hostname[0]))
         try:
