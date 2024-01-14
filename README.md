@@ -15,4 +15,4 @@ Usage instructions:
 Testing:
 - test_checkEndpoint.py contains 10 tests for httpStatusCode() function.
   (The httpsStatusCode function is responsible for retrieving http status code for the endpoint.)
-- Run test: pytest test_checkEndpoint.py -vv
+- Run test: python3 -m pytest
