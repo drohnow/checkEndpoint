@@ -23,7 +23,7 @@ def httpStatusCode():
             status = requests.head(endPoint).status_code
             return endPoint, status
         except:
-            print(Fore.RED + 'It appears that the endpoint SSL certificate has expired.')
+            print(Fore.RED + 'It appears that the endpoint SSL certificate has failed.')
     else:
         try:
          status = requests.head(endPoint).status_code
