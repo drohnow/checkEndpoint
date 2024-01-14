@@ -12,16 +12,31 @@ def docMessage():
 
 # def returns the users inputed endpoint and statuscode result.
 def httpStatusCode():
-    endPoint = input('Enter endpoint beginging with "https://" or "http://": ')
-    print('checking endpoint: %s' % endPoint)
-    status = requests.head(endPoint).status_code
+    endPoint = input('Enter endpoint beginning with "https://" or "http://": ')
+    print('\nchecking endpoint: %s\n' % endPoint)
+    if endPoint[:8] == "https://":
+        # if endpoint fails, then attempts to check SSL certificate for SSL endpoints.
+        print('This is an SSL endpoint that will check SSL certificate expiry..\n')
+        hostname = (endPoint[8:].split("/"))
+        print("SSL certificate status: ", test_host(hostname[0]))
+        try:
+            status = requests.head(endPoint).status_code
+            return endPoint, status
+        except:
+            print(Fore.RED + 'It appears that the endpoint SSL certificate has failed.')
+    else:
+        try:
+         status = requests.head(endPoint).status_code
+         return endPoint, status
+        except:
+            print('Your input was "Null", not formatted correctly, or the site does not exist.')
+            print('This program checks endpoints starting with "https://" or "http://.')
+             
     return endPoint, status
 
 # def processes the status code.
 def endPointException():
-    print('Your input was "Null", not formatted correctly, or the site does not exist.')
-    print('This program checks endpoints starting with "https://" or "http://.')
-    print('...please try again.')
+    print(Fore.WHITE + '...please try again.')
 
 
 
