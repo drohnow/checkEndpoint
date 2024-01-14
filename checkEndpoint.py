@@ -82,8 +82,8 @@ def checkEndpoint(endPoint, httpStatusCode):
                 docMessage()
             else:
                 print('status code is: ' + Fore.YELLOW + str(httpStatusCode))
-                print(Fore.WHITE + 'If the the status code is "1xx", then endpoint received the request and responded with an informational response. \n')
-                print(Fore.WHITE + 'If the the status code is "3xx", then endpoint redirected the request another endpoint. \n')
+                print(Fore.WHITE + 'If the the status code is "1xx", the endpoint received the request and responded with an informational response. \n')
+                print(Fore.WHITE + 'If the the status code is "3xx", the endpoint redirected the request another endpoint. \n')
                 docMessage()
 
     except requests.ConnectionError:
