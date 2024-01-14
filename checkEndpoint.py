@@ -60,7 +60,7 @@ def checkEndpoint(endPoint, httpStatusCode):
                 docMessage()
             elif httpStatusCode == 410:
                 print('status code is: ' + Fore.RED + str(httpStatusCode))
-                print(Fore.WHITE + 'This indicates that the endpoint is \n')
+                print(Fore.WHITE + 'This indicates that the endpoint is not available \n')
                 print('This status code indicates that the page is no longer available from the server and no forwarding address has been set up.')
                 docMessage()
             elif httpStatusCode == 500:
