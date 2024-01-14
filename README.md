@@ -13,6 +13,7 @@ Usage instructions:
 - run: pip install -r requirements.txt
 
 Testing:
-- test_checkEndpoint.py contains 10 tests for httpStatusCode() function.
-  (The httpsStatusCode function is responsible for retrieving http status code for the endpoint.)
+- test_checkEndpoint.py contains the following tests:
+  - 10 tests for httpStatusCode() function.
+  - 2 tests for test_host() function.
 - Run test: python3 -m pytest
