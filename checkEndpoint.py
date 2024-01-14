@@ -18,7 +18,7 @@ def httpStatusCode():
         # if endpoint fails, then attempts to check SSL certificate for SSL endpoints.
         print('This is an SSL endpoint that will check SSL certificate expiry..\n')
         hostname = (endPoint[8:].split("/"))
-        print(test_host(hostname[0]))
+        print("SSL certificate status: ", test_host(hostname[0]))
         try:
             status = requests.head(endPoint).status_code
             return endPoint, status
