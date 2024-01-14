@@ -15,5 +15,5 @@ Usage instructions:
 Testing:
 - test_checkEndpoint.py contains the following tests:
   - 10 tests for httpStatusCode() function.
-  - 2 tests for test_host() function.
+  - 2 tests for checkCert() function.
 - Run test: python3 -m pytest
