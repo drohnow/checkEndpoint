@@ -18,7 +18,7 @@ def httpStatusCode():
         # if endpoint fails, then attempts to check SSL certificate for SSL endpoints.
         print('This is an SSL endpoint...will check SSL certificate status now..\n')
         hostname = (endPoint[8:].split("/"))
-        print("SSL certificate status: ", test_host(hostname[0]))
+        print("SSL certificate status: ", checkCert(hostname[0]))
         try:
             status = requests.head(endPoint).status_code
             return endPoint, status
@@ -91,7 +91,7 @@ def checkEndpoint(endPoint, httpStatusCode):
                 # if endpoint fails, then attempts to check SSL certificate for SSL endpoints.
                 print('failed to connect...if this is an SSL endpoint that will check SSL certificate expiry')
                 hostname = (endPoint[8:].split("/"))
-                print(test_host(hostname[0]))
+                print(checkCert(hostname[0]))
             except:
                 # response to user that endpoint does not exist.
                 print('not able to check SSL certificate expiry; the endpoint may be misspelled or does not exist.')
@@ -118,7 +118,7 @@ def ssl_valid_time_remaining(hostname: str) -> datetime.timedelta:
     return expires - datetime.datetime.utcnow()
 
 # def checks SSL certificate status
-def test_host(hostname: str, buffer_days: int=30) -> str:
+def checkCert(hostname: str, buffer_days: int=30) -> str:
     """Return test message for hostname cert expiration."""
     try:
         will_expire_in = ssl_valid_time_remaining(hostname)

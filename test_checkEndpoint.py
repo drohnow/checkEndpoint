@@ -1,5 +1,6 @@
-from checkEndpoint import httpStatusCode
+from checkEndpoint import httpStatusCode, checkCert
 
+# start - httpStatusCode() test validation
 def test_statusCode101(monkeypatch):
     monkeypatch.setattr('builtins.input', lambda _: "https://httpstat.us/101")
     endPoint, status_code = httpStatusCode()
@@ -50,4 +51,16 @@ def test_statusCodeNegative(monkeypatch):
     monkeypatch.setattr('builtins.input', lambda _: "https://api.instrumental.ai/healthcheck")
     endPoint, status_code = httpStatusCode()
     assert status_code != 404
+# end - httpStatusCode() test validation
+
+
+# start - checkCert() test validation
+def test_checkCertExpired():
+    certStatus = checkCert("expired.badssl.com")
+    assert certStatus == "expired.badssl.com cert error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1006)"
+
+def test_checkCertNotExpired():
+    certStatus = checkCert("api.instrumental.ai")
+    assert certStatus == "api.instrumental.ai cert is fine"
+# end - checkCert() test validation
 
