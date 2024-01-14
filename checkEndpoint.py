@@ -12,16 +12,16 @@ def docMessage():
 
 # def returns the users inputed endpoint and statuscode result.
 def httpStatusCode():
-    endPoint = input("Enter endpoint beginging with 'https://' or 'http://': ")
+    endPoint = input('Enter endpoint beginging with "https://" or "http://": ')
     print('checking endpoint: %s' % endPoint)
     status = requests.head(endPoint).status_code
     return endPoint, status
 
 # def processes the status code.
 def endPointException():
-    print("Your input was 'Null', not formatted correctly, or the site does not exist.")
-    print("This program checks endpoints starting with 'https://' or 'http://.")
-    print("...please try again.")
+    print('Your input was "Null", not formatted correctly, or the site does not exist.')
+    print('This program checks endpoints starting with "https://" or "http://.')
+    print('...please try again.')
 
 
 # def checks https:// and http:// endpoints; takes response and returns infornamtion about http status code and site status.
@@ -34,34 +34,34 @@ def checkEndpoint(endPoint, httpStatusCode):
             elif httpStatusCode == 400:
                 print('status code is: ' + Fore.RED + str(httpStatusCode))
                 print(Fore.WHITE + 'This indicates that the endpoint cannot or will not process the request due to something that is perceived to be a client error. \n')
-                print("This status code indicates the file or page that the browser is requesting wasn’t found by the server.")
+                print('This status code indicates the file or page that the browser is requesting wasn’t found by the server.')
                 docMessage()
             elif httpStatusCode == 404:
                 print('status code is: ' + Fore.RED + str(httpStatusCode))
                 print(Fore.WHITE + 'This indicates that the endpoint is unreachable\n')
-                print("This status code indicates the file or page that the browser is requesting wasn’t found by the server.")
+                print('This status code indicates the file or page that the browser is requesting wasn’t found by the server.')
                 docMessage()
             elif httpStatusCode == 410:
                 print('status code is: ' + Fore.RED + str(httpStatusCode))
                 print(Fore.WHITE + 'This indicates that the endpoint is \n')
-                print("This status code indicates that the page is no longer available from the server and no forwarding address has been set up.")
+                print('This status code indicates that the page is no longer available from the server and no forwarding address has been set up.')
                 docMessage()
             elif httpStatusCode == 500:
                 print('status code is: ' + Fore.RED + str(httpStatusCode))
                 print(Fore.WHITE + 'This indicates that the endpoint is offline and unhealthy!\n')
-                print("This status code indicates status that there is an internal problem with the server.")
+                print('This status code indicates status that there is an internal problem with the server.')
                 docMessage()
             elif httpStatusCode== 503:
                 docMessage()
                 print('status code is: ' + Fore.RED + str(httpStatusCode))
                 print(Fore.WHITE + 'This indicates that the endpoint is offline and unhealthy!\n')
-                print("This status code indicates status that the server in currently overloaded or under maintenance.")
+                print('This status code indicates status that the server in currently overloaded or under maintenance.')
                 docMessage()
             elif httpStatusCode == 505:
                 docMessage()
                 print('status code is: ' + Fore.RED + str(httpStatusCode))
                 print(Fore.WHITE + 'This indicates that the endpoint is offline and unhealthy!\n')
-                print("This status code indicates status that the server in currently overloaded or under maintenance.")
+                print('This status code indicates status that the server in currently overloaded or under maintenance.')
                 docMessage()
             else:
                 print('status code is: ' + Fore.YELLOW + str(httpStatusCode))
@@ -72,12 +72,12 @@ def checkEndpoint(endPoint, httpStatusCode):
     except requests.ConnectionError:
             try:
                 # if endpoint fails, then attempts to check SSL certificate for SSL endpoints.
-                print("failed to connect...if this is an SSL endpoint that will check SSL certificate expiry")
+                print('failed to connect...if this is an SSL endpoint that will check SSL certificate expiry')
                 hostname = (endPoint[8:].split("/"))
                 print(test_host(hostname[0]))
             except:
                 # response to user that endpoint does not exist.
-                print("not able to check SSL certificate expiry; the endpoint may be misspelled or does not exist.")
+                print('not able to check SSL certificate expiry; the endpoint may be misspelled or does not exist.')
 
     # def returns ssl expire date
     def ssl_expiry_datetime(hostname: str) -> datetime.datetime:
